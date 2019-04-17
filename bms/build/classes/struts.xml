@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- 系统登录的struts配置 -->
+	<!--设置项目默认的编码方式 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<!--当出现错误是，出现更多的错误提示 -->
+	<constant name="struts.devMode" value="true"></constant>
+	<!-- 当struts.xml改动后，是否重新加载。默认值为false(生产环境下使用),开发阶段最好打开 -->
+	<constant name="struts.configuration.xml.reload" value="false" />
+	<!--系统 -->
+	<package name="page" namespace="/" extends="struts-default">
+
+
+		
+
+		<!--用户和图书的curd -->
+		<action name="bm_*" class="com.jd.bms.sysmannage.action.CrudPageAction"
+			method="{1}Book">
+			<result name="getId">/WEB-INF/pages/system/booksystem/Bookmainshow.jsp
+			</result>
+			<result name="add">/WEB-INF/pages/system/booksystem/Bookmainadd.jsp
+			</result>
+			<result name="input">/WEB-INF/pages/system/error/Bookmainerror.jsp</result>
+			<result name="update">/WEB-INF/pages/system/booksystem/Bookmainupdate.jsp
+			</result>
+			<result name="adds" type="redirect">/bookshow</result>
+			<result name="Childadds" type="redirect">/bookshowtwo</result>
+			<result name="Itadds" type="redirect">/bookshowthree</result>
+			<result name="bankadd">/WEB-INF/pages/system/classification/Bookbankadd.jsp</result>
+			<result name="bankadds" type="redirect">/bookbank</result>
+			<result name="addUser">/WEB-INF/pages/system/usersystem/useradd.jsp</result>
+			<result name="usermainpage" type="redirect">/usermain</result>
+		</action>
+		<!--分页查询图书 -->
+		<action name="bookshow" class="com.jd.bms.sysmannage.action.PagingAction"
+			method="bookshow">
+			<result name="bookshow">/WEB-INF/pages/system/booksystem/Bookmain.jsp</result>
+		</action>
+		<action name="bookshowtwo" class="com.jd.bms.sysmannage.action.PagingAction"
+			method="bookshowtwo">
+			<result name="bookshowtwo">/WEB-INF/pages/system/booksystem/Bookmain.jsp</result>
+		</action>
+		<action name="bookshowthree" class="com.jd.bms.sysmannage.action.PagingAction"
+			method="bookshowthree">
+			<result name="bookshowthree">/WEB-INF/pages/system/booksystem/Bookmain.jsp</result>
+		</action>
+		<!-- 分页图书种类 -->
+		<action name="bookbank" class="com.jd.bms.sysmannage.action.PagingAction" method="bookbank">
+			<result name="bookbank">/WEB-INF/pages/system/classification/Bookbank.jsp</result>
+		</action>
+		
+		<!--用户信息分页  -->
+		<action name="usermain" class="com.jd.bms.sysmannage.action.PagingAction"
+			method="usermain">
+			<result name="usermain">/WEB-INF/pages/system/usersystem/usermain.jsp</result>
+		</action>
+		<!--用户信息搜索  -->
+		<action name="user_page" class="com.jd.bms.sysmannage.action.BmUserAction" method="user_page">
+			<result name="input">/WEB-INF/pages/system/error/Bookmainerror.jsp</result>
+			<result name="user_page">/WEB-INF/pages/system/usersystem/usermain.jsp</result>
+			<result name="usermain_page" type="redirect">/usermain</result>
+		</action>
+		<!--留言管理：查看、回复、删除  -->
+		<action name="messagex" class="com.jd.bms.sysmannage.action.BmLeaveWordAction" method="messagex">
+			<result name="messagex">/WEB-INF/pages/system/message/userleavemain.jsp</result>
+		</action>
+		<action name="delmess" class="com.jd.bms.sysmannage.action.BmLeaveWordAction" method="delmess">
+			<result name="delmess" type="redirect">/messagex</result>
+		</action>
+		<!--管理员、信息查询、修改，添加管理员，管理员权限控制  -->
+		<action name="adminmess" class="com.jd.bms.sysmannage.action.BmAdminAction" method="adminmess">
+			<result name="admin">/WEB-INF/pages/system/administrator/administrator.jsp</result>
+		</action>
+		<action name="amdin_*" class="com.jd.bms.sysmannage.action.BmAdminAction" method="{1}Admin">
+			<result name="updateAdmin" type="redirect">/adminmess</result>
+		</action>
+		
+		
+		
+		
+		
+		
+		<!--用户购书的记录  -->
+		<!-- <action name="userBokk" class="" method="userBokk">
+			<result name="userBokk"></result>
+		</action> -->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!--                       前端页面                                                                 -->
+		<!--注册 -->
+		<action name="engi" class="com.jd.bms.sysmannage.action.EngiAction"
+			method="engi">
+			<result name="toLogin" type="redirect">/toLogin</result>
+			<result name="regiPage">/registers.jsp</result>
+		</action>
+		<!--进入登录页面 -->
+		<action name="toLogin" class="com.jd.bms.sysmannage.action.LoginAction"
+			method="toLogin">
+			<result name="toLogin">/login.jsp</result>
+		</action>
+		<!--登录判断是否成功否则进入原页面 -->
+		<action name="login" class="com.jd.bms.sysmannage.action.LoginAction"
+			method="login">
+			<result name="main" type="redirect">/main</result>
+			<result name="usermain" type="redirect">/usermain</result>
+			<result name="loginPage">/login.jsp</result>
+		</action>
+		<!--进入成功页面 -->
+		<action name="main" class="com.jd.bms.sysmannage.action.LoginAction"
+			method="main">
+			<result name="mainpage">/WEB-INF/pages/forepart/main/main.jsp</result>
+		</action>
+		<!--少年儿童页面 -->
+		<action name="Child" class="com.jd.bms.sysmannage.action.ChildrenBookAction"
+			method="Child">
+			<result name="Child">/WEB-INF/pages/forepart/main/childrenbookmain.jsp</result>
+		</action>
+		<!-- 文学页面 -->
+		<action name="Literary" class="com.jd.bms.sysmannage.action.LiteraryBookAction" method="Literary">
+			<result name="Literary">/WEB-INF/pages/forepart/main/literarybookmain.jsp</result>
+		</action>
+		<!-- it科技页面 -->
+		<action name="itbook" class="com.jd.bms.sysmannage.action.ItBookAction" method="itbook">
+			<result name="itbook">/WEB-INF/pages/forepart/main/bmitbookmain.jsp</result>
+		</action>
+		<!--留言界面  -->
+		<action name="message" class="com.jd.bms.sysmannage.action.BmLeaveWordAction" method="message">
+			<result name="message">/WEB-INF/pages/forepart/main/messagemain.jsp</result>
+		</action>
+		<action name="add_*" class="com.jd.bms.sysmannage.action.BmLeaveWordAction" method="{1}LeaveWord">
+			<result name="message" type="redirect">/message</result>
+		</action>
+		<!--个人信息  -->
+		<action name="person" class="com.jd.bms.sysmannage.action.BmUserAction" method="person">
+			<result name="person">/WEB-INF/pages/forepart/main/personmain.jsp</result>
+		</action>
+		<!--个人信息修改  -->
+		<action name="userupdate" class="com.jd.bms.sysmannage.action.BmUserAction" method="userupdate">
+			<result name="userupdate" type="redirect">/person</result>
+			<result name="input">/WEB-INF/pages/forepart/main/personmain.jsp</result>
+		</action>
+		<!-- 进入用户密码修改页面 -->
+		<action name="pwdmodil" class="com.jd.bms.sysmannage.action.BmUserPwdAction" method="pwdmodil">
+				<result name="pwd">/WEB-INF/pages/forepart/main/modelfoactionmain.jsp</result>
+		</action>
+		<!--修改密码后进入登录页面  -->
+		<action name="pwdupdate" class="com.jd.bms.sysmannage.action.BmUserPwdAction" method="pwdupdate">
+			<result name="pwdupdate">/WEB-INF/pages/forepart/main/modelfoactionmain.jsp</result>
+			<result name="toLogin" type="redirect">/toLogin</result>
+		</action>
+		<!--查询仓库中的书本数据  -->
+		<action name="bookshop" class="com.jd.bms.sysmannage.action.BookshopAction" method="bookshop">
+			<result name="bookshop">/WEB-INF/pages/forepart/main/bookshopsmain.jsp</result>
+		</action>
+		<!--插入书籍到用户仓库 返回到原视图 -->
+		<action name="adds_*" class="com.jd.bms.sysmannage.action.BookshopAction" method="{1}Book">
+			<result name="libBook" type="redirect">/main</result><!--首页  -->
+			<result name="literyBook" type="redirect">/Literary</result><!-- 文学页面 -->
+			<result name="childBook" type="redirect">/Child</result><!--少儿童书页  -->
+			<result name="bmitBook" type="redirect">/itbook</result>
+		</action>
+		
+		<!--删除书籍  -->
+		<action name="delBook" class="com.jd.bms.sysmannage.action.BookshopAction" method="delBook">
+			<result name="delBook" type="redirect">/bookshop</result>
+		</action>
+	</package>
+</struts>

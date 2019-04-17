@@ -1,0 +1,12 @@
+
+Js:
+
+在HTML body部分中的JavaScripts会在页面加载的时候被执行。
+在HTML head部分中的JavaScripts会在被调用的时候才执行。
+
+一、区别
+	浏览器解析html是从上到下的。
+	如果把javascript放在head里的话，则先被解析,但这时候body还没有解析，所以会返回空值。一般都会绑定一个监听，当全部的html文档解析完之后，再执行代码：
+   windows.onload=function(){
+       //这里放入执行代码
+   }
